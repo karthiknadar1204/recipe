@@ -5,7 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "db:push": "npx drizzle-kit push --config=drizzle.config.js",
+    "db:studio": "npx drizzle-kit studio"
   },
   "keywords": [],
   "type": "module",
@@ -20,6 +22,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "drizzle-kit": "^0.31.4",
     "nodemon": "^3.1.10"
   }
 }
