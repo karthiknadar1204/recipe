@@ -1,0 +1,16 @@
+- npx create-expo-app@latest
+- to start the project: npx expo
+- to reset the project after starting it:npm run reset-project
+
+to get images from external sources:
+```sh
+import Image from "expo-image";
+<Image source={{ uri: "https://example.com/image.jpg" }} style={{ width: 200, height: 200 }} />
+```
+
+to get images from local sources:
+```sh   
+import Image from "expo-image";
+<Image source={require("../assets/images/image.png")} style={{ width: 200, height: 200 }} />
+```
+
