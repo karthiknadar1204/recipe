@@ -28,6 +28,18 @@ const SignInScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  console.log("SignInScreen render - isLoaded:", isLoaded, "loading:", loading);
+
+  // Add loading state check
+  if (!isLoaded) {
+    console.log("Clerk not loaded yet, showing loading state");
+    return (
+      <View style={[authStyles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={authStyles.title}>Loading...</Text>
+      </View>
+    );
+  }
+
   const handleSignIn = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Please fill in all fields");
@@ -58,6 +70,8 @@ const SignInScreen = () => {
     }
   };
 
+    console.log("Rendering SignInScreen component");
+  
   return (
     <View style={authStyles.container}>
       <KeyboardAvoidingView
@@ -74,6 +88,8 @@ const SignInScreen = () => {
               source={require("../../assets/images/icon.png")}
               style={authStyles.image}
               contentFit="contain"
+              onError={(error) => console.log("Image loading error:", error)}
+              onLoad={() => console.log("Image loaded successfully")}
             />
           </View>
 
@@ -88,7 +104,10 @@ const SignInScreen = () => {
                 placeholder="Enter email"
                 placeholderTextColor={COLORS.textLight}
                 value={email}
-                onChangeText={setEmail}
+                onChangeText={(text) => {
+                  console.log("Email input changed:", text);
+                  setEmail(text);
+                }}
                 keyboardType="email-address"
                 autoCapitalize="none"
               />

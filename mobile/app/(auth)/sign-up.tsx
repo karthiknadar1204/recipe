@@ -36,10 +36,15 @@ const SignUpScreen = () => {
     setLoading(true);
 
     try {
+      console.log("Creating sign up...");
       await signUp.create({ emailAddress: email, password });
+      console.log("Sign up created successfully");
 
+      console.log("Preparing email verification...");
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      console.log("Email verification prepared successfully");
 
+      console.log("Setting pending verification to true");
       setPendingVerification(true);
     } catch (err) {
       Alert.alert("Error", err.errors?.[0]?.message || "Failed to create account");
@@ -49,8 +54,12 @@ const SignUpScreen = () => {
     }
   };
 
-  if (pendingVerification)
+  console.log("pendingVerification state:", pendingVerification);
+  
+  if (pendingVerification) {
+    console.log("Rendering VerifyEmail component");
     return <VerifyEmail email={email} onBack={() => setPendingVerification(false)} />;
+  }
 
   return (
     <View style={authStyles.container}>
